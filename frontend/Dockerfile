@@ -2,11 +2,14 @@ FROM node:18-alpine as build-stage
 
 WORKDIR /app
 
+# Instala dependências de build como make, python e g++
+RUN apk add --no-cache python3 make g++
+
 COPY package*.json ./
 
-COPY . .
-
 RUN npm install
+
+COPY . .
 
 RUN npm run build
 
