@@ -2,7 +2,7 @@ FROM node:18-alpine as build-stage
 
 WORKDIR /app
 
-# Instala dependências de bsuild como make, python e g++
+# Instala dependências de bsuildf como make, python e g++
 RUN apk add --no-cache python3 make g++
 
 COPY package*.json ./
