@@ -2,16 +2,17 @@ FROM node:18-alpine as build-stage
 
 WORKDIR /app
 
-# Instala dependências de bsuildf como make, python e g++
-RUN apk add --no-cache python3 make g++
-
 COPY package*.json ./
 
 RUN npm install
 
 COPY . .
 
-RUN npm run build
+# Exibe as dependências instaladas e o Node.js/npm para garantir que tudo está correto
+RUN node -v && npm -v && npm list
+
+# Executa o build com mais verbosidade para capturar mais informações
+RUN npm run build --verbose
 
 FROM nginx:1.19.3-alpine as production-stage
 
